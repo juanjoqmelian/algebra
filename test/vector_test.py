@@ -23,3 +23,19 @@ class VectorTest(unittest.TestCase):
     def test_scalar_produce(self):
         vector = Vector([2.3, 1.1, 3.4, 9.2])
         self.assertEqual(Vector([4.6, 2.2, 6.8, 18.4]), vector.times_scalar(2))
+
+    def test_magnitude(self):
+        vector = Vector([-0.221, 7.437])
+        self.assertEqual(7.44, vector.magnitude())
+
+    def test_magnitude2(self):
+        vector = Vector([8.813, -1.331, -6.247])
+        self.assertEqual(10.884, vector.magnitude())
+
+    def test_normalise_vector(self):
+        vector = Vector([5.581, -2.136])
+        self.assertEqual(Vector([0.934, -0.357]), vector.normalise())
+
+    def test_normalise_vector2(self):
+        vector = Vector([1.996, 3.108, -4.554])
+        self.assertEqual(Vector([0.34, 0.53, -0.777]), vector.normalise())
