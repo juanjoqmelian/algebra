@@ -1,5 +1,7 @@
 import math
 
+from angle_unit import AngleUnit
+
 
 class Vector:
     def __init__(self, coordinates) -> None:
@@ -23,6 +25,13 @@ class Vector:
     def normalise(self):
         magnitude = self.magnitude()
         return self.times_scalar(1/magnitude)
+
+    def dot_product(self, vector):
+        return round(sum([x * y for x, y in zip(self.coordinates, vector.coordinates)]), 3)
+
+    def angle(self, vector, angle_unit: AngleUnit):
+        radians = math.acos(self.dot_product(vector) / (self.magnitude() * vector.magnitude()))
+        return round(radians, 3) if angle_unit == AngleUnit.RADIANS else round(math.degrees(radians), 3)
 
     def __str__(self) -> str:
         return "Vector : {}".format(self.coordinates)
