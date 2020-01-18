@@ -30,8 +30,21 @@ class Vector:
         return round(sum([x * y for x, y in zip(self.coordinates, vector.coordinates)]), 3)
 
     def angle(self, vector, angle_unit: AngleUnit):
-        radians = math.acos(self.dot_product(vector) / (self.magnitude() * vector.magnitude()))
-        return round(radians, 3) if angle_unit == AngleUnit.RADIANS else round(math.degrees(radians), 3)
+        u1 = self.normalise()
+        u2 = vector.normalise()
+        radians = math.acos(u1.dot_product(u2))
+        return round(radians if angle_unit == AngleUnit.RADIANS else math.degrees(radians), 3)
+
+    def is_parallel_to(self, vector):
+        return True if self.is_zero() or vector.is_zero() \
+                       or (self.angle(vector, AngleUnit.DEGREES) == 0
+                           or self.angle(vector, AngleUnit.DEGREES) == 180) else False
+
+    def is_orthogonal_to(self, vector, tolerance=1e-10):
+        return True if self.is_zero() or vector.is_zero() or abs(self.dot_product(vector)) < tolerance else False
+
+    def is_zero(self, tolerance=1e-10):
+        return self.magnitude() < tolerance
 
     def __str__(self) -> str:
         return "Vector : {}".format(self.coordinates)

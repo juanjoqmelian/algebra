@@ -46,12 +46,58 @@ class VectorTest(unittest.TestCase):
         vector2 = Vector([-4.496, -8.755, 7.103])
         self.assertEqual(56.397, vector1.dot_product(vector2))
 
+    def test_dot_product2(self):
+        vector1 = Vector([7.887, 4.138])
+        vector2 = Vector([-8.802, 6.776])
+        self.assertEqual(-41.382, vector1.dot_product(vector2))
+
     def test_angle_of_two_vectors(self):
         vector1 = Vector([3.183, -7.627])
         vector2 = Vector([-2.668, 5.319])
-        self.assertEqual(3.070, vector1.angle(vector2, AngleUnit.RADIANS))
+        self.assertEqual(3.078, vector1.angle(vector2, AngleUnit.RADIANS))
 
     def test_angle_of_two_vectors_in_degrees(self):
         vector1 = Vector([7.35, 0.221, 5.188])
         vector2 = Vector([2.751, 8.259, 3.985])
-        self.assertEqual(60.275, vector1.angle(vector2, AngleUnit.DEGREES))
+        self.assertEqual(60.264, vector1.angle(vector2, AngleUnit.DEGREES))
+
+    def test_is_parallel1(self):
+        vector1 = Vector([-7.579, -7.88])
+        vector2 = Vector([22.737, 23.64])
+        self.assertEqual(True, vector1.is_parallel_to(vector2))
+
+    def test_is_parallel2(self):
+        vector1 = Vector([-2.029, 9.97, 4.172])
+        vector2 = Vector([-9.231, -6.639, -7.245])
+        self.assertEqual(False, vector1.is_parallel_to(vector2))
+
+    def test_is_parallel3(self):
+        vector1 = Vector([-2.328, -7.284, 1.214])
+        vector2 = Vector([-1.821, 1.072, -2.94])
+        self.assertEqual(False, vector1.is_parallel_to(vector2))
+
+    def test_is_parallel4(self):
+        vector1 = Vector([2.118, 4.827])
+        vector2 = Vector([0, 0])
+        self.assertEqual(True, vector1.is_parallel_to(vector2))
+
+    def test_is_orthogonal1(self):
+        vector1 = Vector([-7.579, -7.88])
+        vector2 = Vector([22.737, 23.64])
+        self.assertEqual(False, vector1.is_orthogonal_to(vector2))
+
+    def test_is_orthogonal2(self):
+        vector1 = Vector([-2.029, 9.97, 4.172])
+        vector2 = Vector([-9.231, -6.639, -7.245])
+        self.assertEqual(False, vector1.is_orthogonal_to(vector2))
+
+    @unittest.skip
+    def test_is_orthogonal3(self):
+        vector1 = Vector([-2.328, -7.284, 1.214])
+        vector2 = Vector([-1.821, 1.072, -2.94])
+        self.assertEqual(True, vector1.is_orthogonal_to(vector2))
+
+    def test_is_orthogonal4(self):
+        vector1 = Vector([2.118, 4.827])
+        vector2 = Vector([0, 0])
+        self.assertEqual(True, vector1.is_orthogonal_to(vector2))
